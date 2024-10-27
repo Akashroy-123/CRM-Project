@@ -1,0 +1,28 @@
+@isTest
+public class ConsumerRecordTest {
+    
+    @isTest
+    static void testSendEmailNotification() {
+   
+        Consumer__c testConsumer = new Consumer__c(
+            First_Name__c = 'John',
+            Last_Name__c = 'Doe',
+            Email__c = 'john.doe@example.com',
+            Flour_Type__c = 'Ragi Atta',
+            flour_taken_by_shops_in_KG__c = 10,
+            Mode_of_Payment__c = 'UPI'
+            
+        );
+
+       
+        Test.startTest();
+        insert testConsumer;
+        Test.stopTest();
+
+        // Verify that the email was sent by checking the number of email invocations
+        Integer emailCount = Limits.getEmailInvocations();
+        System.assertEquals(1, emailCount, 'One email should be sent.');
+        
+      
+    }
+}
